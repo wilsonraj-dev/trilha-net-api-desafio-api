@@ -39,14 +39,18 @@ namespace TrilhaApiDesafio.Controllers
 
             if (tarefa == null)
                 return NotFound();
-                
+
             return Ok(tarefa);
         }
 
         [HttpGet("ObterPorData")]
         public IActionResult ObterPorData(DateTime data)
         {
-            var tarefa = _context.Tarefas.Where(x => x.Data.Date == data.Date);
+            // var tarefa = _context.Tarefas.Where(x => x.Data.Date == data.Date);
+            var tarefa = _context.Tarefas.Where(x => x.Data.Date >= data.Date && x.Data <= data.Date);
+            if (tarefa == null)
+                return NotFound();
+
             return Ok(tarefa);
         }
 
